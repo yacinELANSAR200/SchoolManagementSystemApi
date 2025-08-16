@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagementSystem.Domain.DTOs
 {
-    internal class StudentDto
+    public class CourseDtos
     {
     }
 }

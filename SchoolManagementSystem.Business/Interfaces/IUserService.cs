@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagementSystem.Business.Interfaces
 {
-    internal class IUserService
+    public class IUserService
     {
     }
 }

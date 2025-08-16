@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagementSystem.Domain.DTOs.AppUser
 {
-    internal class NewUserDto
+    public class NewUserDto
     {
     }
 }

@@ -1,6 +1,28 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using SchoolManagementSystem.Business.Interfaces;
+using SchoolManagementSystem.Business.Services;
+using SchoolManagementSystem.DataAccess;
+using SchoolManagementSystem.DataAccess.Interfaces;
+using SchoolManagementSystem.DataAccess.Repositories;
+using SchoolManagementSystem.Domain.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<SchoolDbContext>(
+    options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolManagementConnection")));
+
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<SchoolDbContext>();
+
+// Repository registrations
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+
+// Service registrations  
+builder.Services.AddScoped<IStudentService, StudentService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

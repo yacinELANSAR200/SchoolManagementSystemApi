@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagementSystem.DataAccess.Interfaces
 {
-    internal class IUserRepository
+    public class IUserRepository
     {
     }
 }

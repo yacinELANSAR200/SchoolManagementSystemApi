@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagementSystem.DataAccess.Repositories
 {
-    internal class TeacherRepository
+    public class TeacherRepository
     {
     }
 }

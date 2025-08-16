@@ -8,28 +8,24 @@ using System.Threading.Tasks;
 
 namespace SchoolManagementSystem.Domain.Entities
 {
-    public class Student
+    public class Course
     {
-        [Key]
         public int Id { get; set; }
 
         [Required, MaxLength(100)]
-        public string FullName { get; set; }
+        public string Title { get; set; }
 
-        [Required, DataType(DataType.Date)]
-        public DateTime DateOfBirth { get; set; }
+        [Range(1, 10)]
+        public int Credits { get; set; }
 
-        [EmailAddress]
-        public string Email { get; set; }
-
-        [Phone]
-        public string PhoneNumber { get; set; }
+        [ForeignKey(nameof(Teacher))]
+        public int TeacherId { get; set; }
+        public Teacher Teacher { get; set; }
 
         [ForeignKey(nameof(Class))]
         public int ClassId { get; set; }
         public Class Class { get; set; }
-        public ICollection<StudentCourse> Courses { get; set; } = new List<StudentCourse>();
 
-
+        public ICollection<StudentCourse> Students { get; set; } = new List<StudentCourse>();
     }
 }
