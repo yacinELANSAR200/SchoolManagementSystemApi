@@ -17,30 +17,38 @@ namespace SchoolManagementSystem.Business.Services
         {
             _studentRepository = studentRepository;
         }
-        public async Task<IEnumerable<StudentDto>> GetAllStudentsAsync()
+        public async Task<IEnumerable<StudentSummaryDto>> GetAllStudentsAsync()
         {
             var students = await _studentRepository.GetAllAsync();
             return students.Select(MapToDto);
         }
-        public async Task<StudentDto?> GetStudentByIdAsync(int id)
+        public async Task<StudentSummaryDto?> GetStudentByIdAsync(int id)
         {
             var student=await _studentRepository.GetByIdAsync(id);
             return student==null ? null : MapToDto(student);
         }
 
         //todo:replace Course by CourseDto
-        public async Task<IEnumerable<Course>> GetCoursesByStudentIdAsync(int id)
+        public async Task<IEnumerable<CourseSummaryDto>> GetCoursesByStudentIdAsync(int id)
         {
-            return await _studentRepository.GetCoursesByStudentIdAsync(id);
+            var courses= await _studentRepository.GetCoursesByStudentIdAsync(id);
+            return courses.Select(c => new CourseSummaryDto
+            {
+                Id = c.Id,
+                Title = c.Title,
+                Credits = c.Credits,
+                ClassName = c.Class?.Name ?? "Unknown",
+                TeacherName = c.Teacher?.FullName ?? "Unknown"
+            });
         }
 
-        public async Task<IEnumerable<StudentDto>> GetStudentsByClassIdAsync(int classId)
+        public async Task<IEnumerable<StudentSummaryDto>> GetStudentsByClassIdAsync(int classId)
         {
             var students = await _studentRepository.GetByClassIdAsync(classId);
             return students.Select(MapToDto);
         }
 
-        public async Task<StudentDto> CreateStudentAsync(CreateStudentDto createStudentDto)
+        public async Task<StudentSummaryDto> CreateStudentAsync(CreateStudentDto createStudentDto)
         {
             if (await _studentRepository.EmailExistsAsync(createStudentDto.Email))
             {
@@ -65,7 +73,7 @@ namespace SchoolManagementSystem.Business.Services
             return MapToDto(studentWithClasses!);
 
         }
-        public async Task<StudentDto?> UpdateStudentAsync(int id, UpdateStudentDto updateStudentDto)
+        public async Task<StudentSummaryDto?> UpdateStudentAsync(int id, UpdateStudentDto updateStudentDto)
         {
             var existingStudent=await _studentRepository.GetByIdAsync(id);
 
@@ -105,7 +113,7 @@ namespace SchoolManagementSystem.Business.Services
             return await _studentRepository.EmailExistsAsync(email, excludeId);
         }
 
-        public async Task<IEnumerable<StudentDto>> GetPagedStudentsAsync(int pageNumber, int pageSize)
+        public async Task<IEnumerable<StudentSummaryDto>> GetPagedStudentsAsync(int pageNumber, int pageSize)
         {
             var students=await _studentRepository.GetPagedAsync(pageNumber, pageSize);
             return students.Select(MapToDto);
@@ -115,15 +123,16 @@ namespace SchoolManagementSystem.Business.Services
            return await _studentRepository.CountAsync();
         }
 
-        private static StudentDto MapToDto(Student student)
+        private static StudentSummaryDto MapToDto(Student student)
         {
-            return new StudentDto()
+            return new StudentSummaryDto()
             {
                 Id = student.Id,
                 FullName = student.FullName,
                 DateOfBirth = student.DateOfBirth,
                 Email = student.Email,
                 PhoneNumber = student.PhoneNumber,
+                ClassId=student.ClassId,
                 ClassName = student.Class?.Name ?? "Unknown"
             };
         }

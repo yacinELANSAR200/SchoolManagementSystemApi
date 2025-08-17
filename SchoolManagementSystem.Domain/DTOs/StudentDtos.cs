@@ -55,22 +55,16 @@ namespace SchoolManagementSystem.Domain.DTOs
         [Range(1, int.MaxValue, ErrorMessage = "Please select a valid class")]
         public int ClassId { get; set; }
     }
-    public class StudentDto
+    public class StudentSummaryDto
     {
         public int Id { get; set; }
         public string FullName { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-        public int Age 
-        {
-            get 
-            {
-                return DateTime.Now.Year - DateOfBirth.Year - (DateTime.Now.DayOfYear < DateOfBirth.DayOfYear ? 1 : 0);
-            }
-        }
+        
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public int ClassId { get; set; }
+        
         public string ClassName { get; set; }
     }
 

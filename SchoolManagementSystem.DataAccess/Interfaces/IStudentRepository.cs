@@ -1,4 +1,5 @@
-﻿using SchoolManagementSystem.Domain.Entities;
+﻿using SchoolManagementSystem.Domain.DTOs;
+using SchoolManagementSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

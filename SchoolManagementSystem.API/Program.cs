@@ -19,9 +19,11 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
 
 // Repository registrations
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 
 // Service registrations  
 builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
 
 
 builder.Services.AddControllers();

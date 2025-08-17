@@ -10,20 +10,20 @@ namespace SchoolManagementSystem.Business.Interfaces
 {
     public interface IStudentService
     {
-        Task<IEnumerable<StudentDto>> GetAllStudentsAsync();
-        Task<StudentDto?> GetStudentByIdAsync(int id);
+        Task<IEnumerable<StudentSummaryDto>> GetAllStudentsAsync();
+        Task<StudentSummaryDto?> GetStudentByIdAsync(int id);
 
-        Task<IEnumerable<StudentDto>> GetStudentsByClassIdAsync(int classId);
+        Task<IEnumerable<StudentSummaryDto>> GetStudentsByClassIdAsync(int classId);
 
-        Task<IEnumerable<Course>> GetCoursesByStudentIdAsync(int studentId);
-        Task<StudentDto> CreateStudentAsync(CreateStudentDto createStudentDto);
-        Task<StudentDto?> UpdateStudentAsync(int id, UpdateStudentDto updateStudentDto);
+        Task<IEnumerable<CourseSummaryDto>> GetCoursesByStudentIdAsync(int studentId);
+        Task<StudentSummaryDto> CreateStudentAsync(CreateStudentDto createStudentDto);
+        Task<StudentSummaryDto?> UpdateStudentAsync(int id, UpdateStudentDto updateStudentDto);
 
         Task<bool> DeleteStudentAsync(int id);
         Task<bool> EmailExistsAsync(string email);
 
         Task<bool> EmailExistsAsync(string email,int id);
-        Task<IEnumerable<StudentDto>> GetPagedStudentsAsync(int pageNumber, int pageSize);
+        Task<IEnumerable<StudentSummaryDto>> GetPagedStudentsAsync(int pageNumber, int pageSize);
         Task<int> GetStudentsCountAsync();
 
     }

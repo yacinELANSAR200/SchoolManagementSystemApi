@@ -19,7 +19,7 @@ namespace SchoolManagementSystem.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StudentDto>>> GetAllStudents()
+        public async Task<ActionResult<IEnumerable<StudentSummaryDto>>> GetAllStudents()
         {
             try
             {
@@ -33,7 +33,7 @@ namespace SchoolManagementSystem.API.Controllers
             }
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<StudentDto>> GetStudent(int id)
+        public async Task<ActionResult<StudentSummaryDto>> GetStudent(int id)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace SchoolManagementSystem.API.Controllers
             }
         }
         [HttpGet("class/{classId}")]
-        public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudentsByClass(int classId)
+        public async Task<ActionResult<IEnumerable<StudentSummaryDto>>> GetStudentsByClass(int classId)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace SchoolManagementSystem.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<StudentDto>> CreateStudent(CreateStudentDto createStudentDto)
+        public async Task<ActionResult<StudentSummaryDto>> CreateStudent(CreateStudentDto createStudentDto)
         {
             try
             {
@@ -112,7 +112,7 @@ namespace SchoolManagementSystem.API.Controllers
             }
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<StudentDto>> UpdateStudent(int id, UpdateStudentDto updateStudentDto)
+        public async Task<ActionResult<StudentSummaryDto>> UpdateStudent(int id, UpdateStudentDto updateStudentDto)
         {
             try
             {

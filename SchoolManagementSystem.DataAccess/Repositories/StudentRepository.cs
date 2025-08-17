@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.DataAccess.Interfaces;
+using SchoolManagementSystem.Domain.DTOs;
 using SchoolManagementSystem.Domain.Entities;
 
 namespace SchoolManagementSystem.DataAccess.Repositories
@@ -36,13 +37,15 @@ namespace SchoolManagementSystem.DataAccess.Repositories
                 .Where(S => S.ClassId == classId)
                 .ToListAsync();
         }
+        //update to coursesummarydto
         public async Task<IEnumerable<Course>> GetCoursesByStudentIdAsync(int studentId)
         {
             return await _context.StudentCourses
-                        .Where(sc=>sc.StudentId==studentId)
-                        .Include(sc=>sc.Course)
-                        .Select(sc=>sc.Course)
+                        .Where(sc => sc.StudentId == studentId)
+                        .Include(sc => sc.Course)
+                        .Select(sc => sc.Course)
                         .ToListAsync();
+
         }
 
         public async Task<Student?> GetByEmailAsync(string email)
